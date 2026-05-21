@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/inter/wght-italic.css";
+
+@theme {
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #d9e8ff;
+  --color-brand-200: #bcd6ff;
+  --color-brand-300: #8fbcff;
+  --color-brand-400: #5b97ff;
+  --color-brand-500: #3a7bff;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+
+  --color-canvas-from: #cfe1ff;
+  --color-canvas-via: #a7c8ff;
+  --color-canvas-to: #7ba9ff;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 30px 80px -30px rgba(30, 64, 175, 0.35),
+                 0 2px 8px -2px rgba(15, 23, 42, 0.06);
+  --shadow-card-sm: 0 10px 30px -12px rgba(30, 64, 175, 0.18);
+
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-slate-900);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #ffffffcc, transparent 60%),
+      linear-gradient(180deg, var(--color-canvas-from) 0%, var(--color-canvas-via) 45%, var(--color-canvas-to) 100%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Subtle background for the admin shell (lighter than the wizard canvas) */
+  .bg-admin-canvas {
+    background:
+      radial-gradient(1200px 600px at 50% -20%, #e8f0fc 0%, transparent 50%),
+      linear-gradient(180deg, #f5f7fb 0%, #eef2f8 100%);
+    background-attachment: fixed;
+  }
+
+  /* Card with the photo-realistic shadow used in references */
+  .card-shadow { box-shadow: var(--shadow-card); }
+  .card-shadow-sm { box-shadow: var(--shadow-card-sm); }
+
+  /* Hairline divider in a card */
+  .hairline { border-top: 1px solid rgb(226 232 240 / 0.7); }
+
+  /* Used by the wizard rail line */
+  .rail-line {
+    background-image: linear-gradient(to bottom, currentColor 50%, transparent 50%);
+    background-size: 2px 6px;
+    background-repeat: repeat-y;
+  }
+
+  /* react-day-picker styling hook overrides — set via the components/ui/DatePicker.tsx */
+  .rdp-root {
+    --rdp-accent-color: var(--color-brand-600);
+    --rdp-accent-background-color: var(--color-brand-50);
+  }
+}
+
+/* Scroll behavior — smooth in-page anchors */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
